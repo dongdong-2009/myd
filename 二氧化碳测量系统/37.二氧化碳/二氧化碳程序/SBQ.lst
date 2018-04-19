@@ -1,0 +1,72 @@
+C51 COMPILER V9.00   SBQ                                                                   10/31/2017 11:36:32 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE SBQ
+OBJECT MODULE PLACED IN SBQ.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Project\SBQ.c BROWSE INCDIR(.\Project) DEBUG OBJECTEXTEND PRINT(.\SBQ.ls
+                    -t) OBJECT(SBQ.obj)
+
+line level    source
+
+   1          #include <REG51.H>
+   2          #include <SBQ.H>
+   3          #include<intrins.h>
+   4          
+   5          #define u16 unsigned int
+   6          #define u8 unsigned char
+   7          
+   8          u16 ms=0;
+   9          /*****初始化IO*****/
+  10          void AD_Init(u8 S_channel)
+  11          {
+  12   1       P1M1=P1M1|S_channel;//P1^7为高阻输入，其余脚为准双向弱上拉 //AD采集口
+*** ERROR C202 IN LINE 12 OF PROJECT\SBQ.C: 'P1M1': undefined identifier
+  13   1       P1M0=P1M0|0X00;
+*** ERROR C202 IN LINE 13 OF PROJECT\SBQ.C: 'P1M0': undefined identifier
+  14   1       
+  15   1       ADC_RES=0X00;//清空结果
+*** ERROR C202 IN LINE 15 OF PROJECT\SBQ.C: 'ADC_RES': undefined identifier
+  16   1       AUXR1=0X00;//选择高8位低2位模式储存
+*** ERROR C202 IN LINE 16 OF PROJECT\SBQ.C: 'AUXR1': undefined identifier
+  17   1       _nop_();
+  18   1       _nop_();
+  19   1       _nop_();
+  20   1       _nop_();       
+  21   1      }
+  22          /*****初始化AD*****/
+  23          void Channel(u8 channel)
+  24          {
+  25   1        P1ASF=0x01<<channel;//使能AD通道
+*** ERROR C202 IN LINE 25 OF PROJECT\SBQ.C: 'P1ASF': undefined identifier
+  26   1        ADC_CONTR=0XE8|channel;//SPEED为540T/次 
+*** ERROR C202 IN LINE 26 OF PROJECT\SBQ.C: 'ADC_CONTR': undefined identifier
+  27   1        _nop_();
+  28   1        _nop_();
+  29   1        _nop_();
+  30   1        _nop_();      
+  31   1      }
+  32          
+  33          /*****获取AD数据*****/
+  34          u8 Get_ADC(u8 channel,u8 time)
+  35          {
+  36   1        u8 Count=0;
+  37   1        unsigned long Sum=0; 
+  38   1      
+  39   1        for(Count=0;Count<time;Count++)
+  40   1        {
+  41   2           Channel(channel);
+  42   2               while(!(ADC_CONTR&ADC_FLAG));
+*** ERROR C202 IN LINE 42 OF PROJECT\SBQ.C: 'ADC_CONTR': undefined identifier
+  43   2               ADC_CONTR&=!ADC_FLAG;
+*** ERROR C202 IN LINE 43 OF PROJECT\SBQ.C: 'ADC_CONTR': undefined identifier
+  44   2               Sum=ADC_RES+Sum;//数据存储
+*** ERROR C202 IN LINE 44 OF PROJECT\SBQ.C: 'ADC_RES': undefined identifier
+  45   2               ADC_RES=0;//清空结果 
+C51 COMPILER V9.00   SBQ                                                                   10/31/2017 11:36:32 PAGE 2   
+
+*** ERROR C202 IN LINE 45 OF PROJECT\SBQ.C: 'ADC_RES': undefined identifier
+  46   2        }
+  47   1        return Sum/time;
+  48   1      }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  10 ERROR(S)

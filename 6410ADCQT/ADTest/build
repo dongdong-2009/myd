@@ -1,0 +1,12 @@
+
+#cd  /root/temp/ledtest
+
+export  QMAKESPEC=/root/yizhi/qtopia-free-2.2.0/qtopia/mkspecs/qws/linux-arm-g++
+
+source  /root/yizhi/qtopia-free-2.2.0/setQteEnv
+
+source /root/yizhi/qtopia-free-2.2.0/setQpeEnv
+
+/root/yizhi/qtopia-free-2.2.0/qtopia/bin/qmake && make 
+
+

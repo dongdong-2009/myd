@@ -1,0 +1,124 @@
+C51 COMPILER V9.00   MAIN                                                                  10/31/2017 11:36:30 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Project\main.c BROWSE INCDIR(.\Project) DEBUG OBJECTEXTEND PRINT(.\main.
+                    -lst) OBJECT(main.obj)
+
+line level    source
+
+   1          #include <REG51.H>
+   2          #include<intrins.h>
+   3          #include <LCD1602.h>
+   4          #include <SBQ.H>
+   5          #include <DS18B20.h>
+   6          
+   7          u8 dis[4]={0,0,0,0};
+   8          u16 Time=0;
+   9          u16 V1=0;V2=0;
+  10          float Proportion;
+  11          
+  12          sbit Ctrl=P3^7;
+  13          
+  14          /*****定时器T0初始化*****/
+  15          void Time0_Init()
+  16          {
+  17   1        TMOD=0X01;
+  18   1        EA=1;
+  19   1        TR0=1;
+  20   1        ET0=1;
+  21   1        TH0=0X3C;//50ms
+  22   1        TL0=0XB0;
+  23   1      }
+  24          
+  25          
+  26          void delay(u16 t)
+  27          {
+  28   1        u16 j;
+  29   1         for(;t>0;t--)
+  30   1               for(j=113;j>0;j--);
+  31   1      }
+  32          
+  33          void main()       
+  34          {
+  35   1        AD_Init(0xC0);
+  36   1        LCD_Initial();
+  37   1        Time0_Init();
+  38   1      
+  39   1        LCD_Print(2,0,"Temperature");//1602显示
+  40   1        LCD_Print(4,1,"Control");
+  41   1        delay(5000);
+  42   1        LCD_Write(0x00, 0x01);//清屏
+  43   1      
+  44   1        Ctrl=0;
+  45   1        while(1)
+  46   1        {
+  47   2                V1=Get_ADC(3,50);
+  48   2                V2=Get_ADC(4,50);
+  49   2                Proportion=(float)V1/V2*10; 
+  50   2                V1=50*V1/255;
+  51   2                V2=50*V2/255;
+  52   2      
+  53   2                dis[0]=(u16)Proportion/100+'0';//计算两个通道比例
+  54   2            dis[1]=(u16)Proportion%100/10+'0';
+C51 COMPILER V9.00   MAIN                                                                  10/31/2017 11:36:30 PAGE 2   
+
+  55   2                dis[2]=(u16)Proportion%100%10+'0';
+  56   2                LCD_Print(10,0,"P:  . ");
+  57   2            LCD_PutChar(12,0,&dis[0]);//1602显示比值
+  58   2            LCD_PutChar(13,0,&dis[1]);        
+  59   2                LCD_PutChar(15,0,&dis[2]);
+  60   2                         
+  61   2                dis[0]=V1/10+'0';//计算通道一电压
+  62   2            dis[1]=V1%10+'0';
+  63   2                LCD_Print(0,0,"V1: . V");
+  64   2            LCD_PutChar(3,0,&dis[0]);//1602显示
+  65   2            LCD_PutChar(5,0,&dis[1]);
+  66   2      
+  67   2            dis[0]=V2/10+'0';//计算通道二电压
+  68   2            dis[1]=V2%10+'0';
+  69   2                LCD_Print(0,1,"V2: . V");
+  70   2            LCD_PutChar(3,1,&dis[0]);//1602显示
+  71   2            LCD_PutChar(5,1,&dis[1]);
+  72   2      
+  73   2                delay(5000);
+  74   2        }
+  75   1      }
+  76          
+  77          
+  78          /*********定时器中断**********/
+  79          void Timer0() interrupt 1
+  80          {
+  81   1        TH0=0X3C;//50ms
+  82   1        TL0=0XB0;
+  83   1      
+  84   1        Time++;
+  85   1        if(Time<=90)
+  86   1        {
+  87   2          Ctrl=0;
+  88   2        }
+  89   1        else if(Time>=90&&Time<=100)
+  90   1        {
+  91   2          Ctrl=1;
+  92   2        }
+  93   1        else
+  94   1        {
+  95   2          Time=0;
+  96   2        }
+  97   1      }
+  98            
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    570    ----
+   CONSTANT SIZE    =     43    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

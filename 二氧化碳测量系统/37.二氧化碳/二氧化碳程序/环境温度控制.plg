@@ -1,0 +1,24 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\cheng\Documents\学习\暑期 项目\综合设计\37.二氧化碳\二氧化碳程序\二氧化碳.uvproj
+Project File Date:  10/28/2017
+
+<h2>Output:</h2>
+Build target '目标 1'
+compiling main.c...
+compiling LCD1602.c...
+compiling SBQ.c...
+PROJECT\SBQ.C(12): error C202: 'P1M1': undefined identifier
+PROJECT\SBQ.C(13): error C202: 'P1M0': undefined identifier
+PROJECT\SBQ.C(15): error C202: 'ADC_RES': undefined identifier
+PROJECT\SBQ.C(16): error C202: 'AUXR1': undefined identifier
+PROJECT\SBQ.C(25): error C202: 'P1ASF': undefined identifier
+PROJECT\SBQ.C(26): error C202: 'ADC_CONTR': undefined identifier
+PROJECT\SBQ.C(42): error C202: 'ADC_CONTR': undefined identifier
+PROJECT\SBQ.C(43): error C202: 'ADC_CONTR': undefined identifier
+PROJECT\SBQ.C(44): error C202: 'ADC_RES': undefined identifier
+PROJECT\SBQ.C(45): error C202: 'ADC_RES': undefined identifier
+Target not created

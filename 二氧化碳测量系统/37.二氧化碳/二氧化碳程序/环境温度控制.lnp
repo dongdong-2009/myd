@@ -1,0 +1,5 @@
+"main.obj",
+"LCD1602.obj",
+"SBQ.obj" 
+TO "环境温度控制" 
+RAMSIZE(256) 

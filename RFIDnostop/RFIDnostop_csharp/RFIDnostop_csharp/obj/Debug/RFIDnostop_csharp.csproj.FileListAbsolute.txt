@@ -1,0 +1,9 @@
+Y:\beifen\mymatlabprj\daizuo\RFIDnostop\RFIDnostop_csharp\RFIDnostop_csharp\bin\Debug\RFIDnostop_csharp.exe.config
+Y:\beifen\mymatlabprj\daizuo\RFIDnostop\RFIDnostop_csharp\RFIDnostop_csharp\obj\Debug\RFIDnostop_csharp.csprojResolveAssemblyReference.cache
+Y:\beifen\mymatlabprj\daizuo\RFIDnostop\RFIDnostop_csharp\RFIDnostop_csharp\obj\Debug\RFIDnostop_csharp.Form1.resources
+Y:\beifen\mymatlabprj\daizuo\RFIDnostop\RFIDnostop_csharp\RFIDnostop_csharp\obj\Debug\RFIDnostop_csharp.Properties.Resources.resources
+Y:\beifen\mymatlabprj\daizuo\RFIDnostop\RFIDnostop_csharp\RFIDnostop_csharp\obj\Debug\RFIDnostop_csharp.csproj.GenerateResource.Cache
+Y:\beifen\mymatlabprj\daizuo\RFIDnostop\RFIDnostop_csharp\RFIDnostop_csharp\bin\Debug\RFIDnostop_csharp.exe
+Y:\beifen\mymatlabprj\daizuo\RFIDnostop\RFIDnostop_csharp\RFIDnostop_csharp\bin\Debug\RFIDnostop_csharp.pdb
+Y:\beifen\mymatlabprj\daizuo\RFIDnostop\RFIDnostop_csharp\RFIDnostop_csharp\obj\Debug\RFIDnostop_csharp.exe
+Y:\beifen\mymatlabprj\daizuo\RFIDnostop\RFIDnostop_csharp\RFIDnostop_csharp\obj\Debug\RFIDnostop_csharp.pdb

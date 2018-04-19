@@ -1,0 +1,8 @@
+alltest.cpp
+alltest.h
+alltestui.cpp
+alltestui.h
+main.cpp
+widget.ui
+嵌入式.pro
+Makefile

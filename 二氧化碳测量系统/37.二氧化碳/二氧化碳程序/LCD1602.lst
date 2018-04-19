@@ -1,0 +1,237 @@
+C51 COMPILER V9.00   LCD1602                                                               10/31/2017 11:36:31 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE LCD1602
+OBJECT MODULE PLACED IN LCD1602.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Project\LCD1602.c BROWSE INCDIR(.\Project) DEBUG OBJECTEXTEND PRINT(.\LC
+                    -D1602.lst) OBJECT(LCD1602.obj)
+
+line level    source
+
+   1          #include <STC12C5A.H>
+   2          #include <intrins.h>
+   3          #include <LCD1602.h>
+   4          //#include <Chinese.h>  
+   5          //注意那个LCD_Wait()函数,它是判"忙"标志的,在实际硬件要把注掉的那种打开
+   6          //Port Definitions**********************************************************
+   7          sbit LcdRs= P1^0;           //寄存器选择端
+   8          sbit LcdRw= P1^1;               //读写控制端
+   9          sbit LcdEn= P1^2;
+  10          sfr  DBPort= 0x80;              //P0=0x80,P1=0x90,P2=0xA0,P3=0xB0.数据端口
+  11          
+  12          //unsigned char LCD_Wait(void)
+  13          //{
+  14          //  LcdRs=0;
+  15          //  LcdRw=1;    _nop_();_nop_();
+  16          //  LcdEn=1;    _nop_();_nop_();
+  17          ////while(DBPort&0x80);//在用Proteus仿真时，注意用屏蔽此语句，在调用GotoXY()时，会进入死循环，
+  18          //                                       //可能在写该控制字时，该模块没有返回写入完备命令，即DBPort&0x80==0x80
+  19          //                                       //实际硬件时打开此语句
+  20          //  LcdEn=0;
+  21          //  return DBPort;              
+  22          //}
+  23          //向LCD写入命令或数据************************************************************
+  24          #define LCD_COMMAND                     0      // Command
+  25          #define LCD_DATA                        1      // Data
+  26          #define LCD_CLEAR_SCREEN        0x01      // 清屏
+  27          #define LCD_HOMING              0x02      // 光标返回原点
+  28          void LCD_Write(bit style, unsigned char input)
+  29          {
+  30   1        DBPort=input; 
+  31   1        LcdRs=style;
+  32   1        LcdRw=0;              
+  33   1        LcdEn=0;
+  34   1        delayms(2); 
+  35   1        LcdEn=1;
+  36   1        delayms(2);                           
+  37   1      }
+  38          
+  39          //设置显示模式************************************************************
+  40          #define LCD_SHOW                        0x04    //显示开
+  41          #define LCD_HIDE                        0x00    //显示关          
+  42          
+  43          #define LCD_CURSOR                      0x02    //显示光标
+  44          #define LCD_NO_CURSOR           0x00    //无光标                     
+  45          
+  46          #define LCD_FLASH                       0x01    //光标闪动
+  47          #define LCD_NO_FLASH            0x00    //光标不闪动
+  48          
+  49          void LCD_SetDisplay(unsigned char DisplayMode)
+  50          {
+  51   1        LCD_Write(LCD_COMMAND, 0x08|DisplayMode);     
+  52   1      }
+  53          
+  54          //设置输入模式************************************************************
+C51 COMPILER V9.00   LCD1602                                                               10/31/2017 11:36:31 PAGE 2   
+
+  55          #define LCD_AC_UP                       0x02
+  56          #define LCD_AC_DOWN                     0x00      // default
+  57          
+  58          #define LCD_MOVE                        0x01      // 画面可平移
+  59          #define LCD_NO_MOVE                     0x00      //default
+  60          
+  61          void LCD_SetInput(unsigned char InputMode)
+  62          {
+  63   1        LCD_Write(LCD_COMMAND, 0x04|InputMode);
+  64   1      }
+  65          
+  66          
+  67          //初始化LCD************************************************************
+  68          void LCD_Initial()
+  69          {
+  70   1        LcdEn=0;
+  71   1        LCD_Write(LCD_COMMAND,0x38);           //8位数据端口,2行显示,5*7点阵
+  72   1        LCD_Write(LCD_COMMAND,0x38);
+  73   1        LCD_SetDisplay(LCD_SHOW|LCD_NO_CURSOR);    //开启显示, 无光标
+  74   1        LCD_Write(LCD_COMMAND,LCD_CLEAR_SCREEN);   //清屏
+  75   1        LCD_SetInput(LCD_AC_UP|LCD_NO_MOVE);       //AC递增, 画面不动
+  76   1      }
+  77          
+  78          //************************************************************************
+  79          void GotoXY(unsigned char x, unsigned char y)
+  80          {
+  81   1        if(y==0)
+  82   1        {
+  83   2          LCD_Write(LCD_COMMAND,0x80|x);
+  84   2              LCD_Write(LCD_COMMAND,0x80|x);
+  85   2        }
+  86   1        if(y==1)
+  87   1        {
+  88   2              LCD_Write(LCD_COMMAND,0xc0|x);
+  89   2              LCD_Write(LCD_COMMAND,0xc0|x);
+  90   2        }
+  91   1      }
+  92          
+  93          void Print(unsigned char *str)
+  94          {
+  95   1        while(*str!='\0')
+  96   1        {
+  97   2              LCD_Write(LCD_DATA,*str);
+  98   2              str++;
+  99   2        }
+ 100   1      }
+ 101          
+ 102          void LCD_Print(unsigned char x, unsigned char y, unsigned char *str)
+ 103          {
+ 104   1        GotoXY(x,y);
+ 105   1        Print(str);
+ 106   1      }
+ 107          void LCD_PutChar(unsigned char x, unsigned char y, unsigned char *str)
+ 108          {
+ 109   1        GotoXY(x,y);
+ 110   1        LCD_Write(LCD_DATA,*str);
+ 111   1      }
+ 112          ///****************************************************************************************************
+ 113          ////测量字符串
+ 114          //****************************************************************************************************/
+ 115          //unsigned int Strings(unsigned char *s)
+ 116          //{
+C51 COMPILER V9.00   LCD1602                                                               10/31/2017 11:36:31 PAGE 3   
+
+ 117          //  unsigned int number=0;
+ 118          //      
+ 119          //  while(*s)
+ 120          //  {   
+ 121          //    if( *s < 0x80)                                            
+ 122          //    {
+ 123          //      s++;number++;                                   
+ 124          //    }
+ 125          //    else
+ 126          //    {
+ 127          //      s+=2;number+=2;                                        
+ 128          //    }
+ 129          //  }
+ 130          //
+ 131          //  return number;
+ 132          //}
+ 133          ///****************************************************************************************************
+ 134          ////显示点阵
+ 135          //****************************************************************************************************/
+ 136          //void LCD_Put5x8(unsigned char x, unsigned char  y, unsigned char g[2])
+ 137          //{
+ 138          //      int k,i;                  
+ 139          //
+ 140          //
+ 141          //      LCD_Write(LCD_COMMAND,0x40);
+ 142          //
+ 143          //      for (k=0;k<64;k++)                                      
+ 144          //      { 
+ 145          //        if ((ch16[k].GBK[0]==g[0])&&(ch16[k].GBK[1]==g[1]))   
+ 146          //        { 
+ 147          //      for(i=0;i<8;i++)                                   
+ 148          //              {
+ 149          //                 unsigned char m=ch16[k].hz16[i];                 
+ 150          //                 LCD_Write(LCD_DATA,m);       
+ 151          //              } 
+ 152          //              break;   
+ 153          //        }  
+ 154          //    }
+ 155          //      if(y==0)
+ 156          //      {
+ 157          //        LCD_Write(LCD_COMMAND,0x80|x);
+ 158          //        LCD_Write(LCD_COMMAND,0x80|x);
+ 159          //      }
+ 160          //      else
+ 161          //      {
+ 162          //        LCD_Write(LCD_COMMAND,0xc0|x);
+ 163          //        LCD_Write(LCD_COMMAND,0xc0|x);
+ 164          //      }
+ 165          //      for(i=0;i<8;i++)
+ 166          //       LCD_Write(LCD_DATA, i);
+ 167          //}
+ 168          //
+ 169          ///****************************************************************************************************
+ 170          //显示字符串
+ 171          //****************************************************************************************************/
+ 172          //void TFT_PutString(unsigned char x, unsigned char y, unsigned char *s) 
+ 173          //{
+ 174          //  unsigned char l=0;                                  
+ 175          //      
+ 176          //  while(*s) 
+ 177          //  {
+ 178          //      if( *s < 0x80)                                  
+C51 COMPILER V9.00   LCD1602                                                               10/31/2017 11:36:31 PAGE 4   
+
+ 179          //      {
+ 180          //        LCD_Print(x+l,y,(unsigned char*)s);                   
+ 181          //        s++;l++;                                              
+ 182          //      }
+ 183          //      else
+ 184          //      {
+ 185          //        LCD_Put5x8(x+l,y,(unsigned char*)s);  
+ 186          //        s+=2;l++;                                        
+ 187          //      }
+ 188          //  }    
+ 189          //}
+ 190          
+ 191          
+ 192          /*************延时MS************/
+ 193          void delayms(u16 ms)
+ 194          {
+ 195   1        int j;
+ 196   1        for(ms;ms>0;ms--)
+ 197   1          for(j=0;j<1125;j++);
+ 198   1      }
+ 199          
+ 200          
+ 201          
+ 202          
+ 203          
+ 204          
+ 205          
+ 206          
+ 207          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    246    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

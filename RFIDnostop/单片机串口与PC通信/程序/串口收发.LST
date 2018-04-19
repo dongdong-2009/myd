@@ -1,0 +1,350 @@
+C51 COMPILER V9.54   ________                                                              04/12/2018 09:20:42 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE ________
+OBJECT MODULE PLACED IN ´®¿ÚÊÕ·¢.OBJ
+COMPILER INVOKED BY: d:\Keil_v5_51\C51\BIN\C51.EXE ´®¿ÚÊÕ·¢.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          /*********************************************************************************
+   2          * ¡¾±àÐ´Ê±¼ä¡¿£º 2014Äê3ÔÂ5ÈÕ
+   3          * ¡¾×÷    Õß¡¿£º ÇåÏèµç×Ó:03
+   4          * ¡¾°æ    ±¾¡¿£º 1.0
+   5          * ¡¾Íø    Õ¾¡¿£º http://www.qxmcu.com/ 
+   6          * ¡¾ÌÔ±¦µêÆÌ¡¿£º http://qxmcu.taobao.com/ (Ö±Ïúµê)  http://qx-mcu.taobao.com/  £¨×Üµê£©
+   7          * ¡¾ÊµÑéÆ½Ì¨¡¿£º QX-MCS51 µ¥Æ¬»ú¿ª·¢°å
+   8          * ¡¾Íâ²¿¾§Õñ¡¿£º 11.0592mhz 
+   9          * ¡¾Ö÷¿ØÐ¾Æ¬¡¿£º STC89C52RC
+  10          * ¡¾±àÒë»·¾³¡¿£º Keil ¦ÌVisio4  
+  11          * ¡¾³ÌÐò¹¦ÄÜ¡¿£º ´®¿ÚÖÐ¶Ï³ÌÐòÊµÑé¡ª¡ªÍ¨¹ýµ¥Æ¬»úÏòµçÄÔ·¢ËÍÊý¾Ý                                 
+  12          * ¡¾Ê¹ÓÃËµÃ÷¡¿£º ±ÈÌØÂÊ9600£¬Ð£ÑéÎ»£ºÎÞ Í£Ö¹Î»£º1
+  13          **********************************************************************************/
+  14          
+  15          /*Ô¤´¦ÀíÃüÁî*/
+  16          #include <reg52.h>      //°üº¬µ¥Æ¬»ú¼Ä´æÆ÷µÄÍ·ÎÄ¼þ
+  17          #include <intrins.h>
+  18          #define uchar unsigned char
+  19          #define uint unsigned int
+  20          uchar num,a;
+  21          #define uchar unsigned char 
+  22          sbit P2_0 = P2^0;
+  23          sbit P2_1 = P2^1;
+  24          sbit P2_2 = P2^2;
+  25          sbit P2_3 = P2^3;
+  26          
+  27          sbit TXD1 = P3^3; //??????? 
+  28          sbit RXD1 = P3^2;   //???????   
+  29          bdata unsigned char SBUF1;   //????????? 
+  30          sbit SBUF1_bit0 = SBUF1^0; 
+  31          sbit SBUF1_bit1 = SBUF1^1; 
+  32          sbit SBUF1_bit2 = SBUF1^2; 
+  33          sbit SBUF1_bit3 = SBUF1^3; 
+  34          sbit SBUF1_bit4 = SBUF1^4; 
+  35          sbit SBUF1_bit5 = SBUF1^5; 
+  36          sbit SBUF1_bit6 = SBUF1^6; 
+  37          sbit SBUF1_bit7 = SBUF1^7;  
+  38          bdata unsigned char SBUF1_send;   //????????? 
+  39          sbit SBUF1_send_bit0 = SBUF1_send^0; 
+  40          sbit SBUF1_send_bit1 = SBUF1_send^1; 
+  41          sbit SBUF1_send_bit2 = SBUF1_send^2; 
+  42          sbit SBUF1_send_bit3 = SBUF1_send^3; 
+  43          sbit SBUF1_send_bit4 = SBUF1_send^4; 
+  44          sbit SBUF1_send_bit5 = SBUF1_send^5; 
+  45          sbit SBUF1_send_bit6 = SBUF1_send^6; 
+  46          sbit SBUF1_send_bit7 = SBUF1_send^7; 
+  47          unsigned int tcount;
+  48          unsigned char m;
+  49          uchar code table[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,
+  50                                  0xf8,0x80,0x90,0x88,0x83,0xc6,0xa1,0x86,0x8e,0x89,0xc7,0xc8,0xc1};
+  51          uchar code cardtable[]={0x00,0x03,0x4a,0x18};
+  52          uchar card_msg[36];
+  53          uchar card_msg_cp[36];
+  54          uchar msg_start=0;
+  55          
+C51 COMPILER V9.54   ________                                                              04/12/2018 09:20:42 PAGE 2   
+
+  56          void delay_bps() 
+  57          {
+  58   1        
+  59   1      unsigned char i; 
+  60   1        EA=0;
+  61   1      for (i = 0; i < 29; i++);
+  62   1      _nop_();
+  63   1      _nop_();
+  64   1      
+  65   1        EA=1;
+  66   1      } //???9600 ????9600???  
+  67          void delay(uchar i)
+  68          {
+  69   1        uchar j,k; 
+  70   1        for(j=i;j>0;j--)
+  71   1        for(k=125;k>0;k--);
+  72   1      }
+  73          
+  74          
+  75          void putchar2(unsigned char input)    //??????????
+  76           {      
+  77   1        SBUF1_send = input;      
+  78   1        TXD1 = 0;  //???     
+  79   1        delay_bps();          
+  80   1        TXD1 = SBUF1_send_bit0;  //0     
+  81   1        delay_bps();          
+  82   1        TXD1 = SBUF1_send_bit1;  //1     
+  83   1        delay_bps();          
+  84   1        TXD1 = SBUF1_send_bit2;  //2     
+  85   1        delay_bps();          
+  86   1        TXD1 = SBUF1_send_bit3;  //3     
+  87   1        delay_bps();         
+  88   1        TXD1 = SBUF1_send_bit4;  //4     
+  89   1        delay_bps();          
+  90   1        TXD1 = SBUF1_send_bit5;  //5     
+  91   1        delay_bps();          
+  92   1        TXD1 = SBUF1_send_bit6;  //6     
+  93   1        delay_bps();         
+  94   1        TXD1 = SBUF1_send_bit7;  //7     
+  95   1        delay_bps();          
+  96   1        TXD1 = 1;       //???     
+  97   1        delay_bps();     
+  98   1      }  
+  99           
+ 100          void display(uint x)
+ 101          {
+ 102   1        uchar x1,x2,x3,x4;
+ 103   1          uchar i=10;
+ 104   1        x1 = x>>12;
+ 105   1        x2 = x/256%16;
+ 106   1        x3 = x/16%16;
+ 107   1        x4 = x%16;
+ 108   1      
+ 109   1      
+ 110   1         
+ 111   1        
+ 112   1          P0=table[x1];
+ 113   1        //P0 = 0xa4;
+ 114   1         P2_0 = 0;
+ 115   1        while(i--);
+ 116   1       //  delay(5);
+ 117   1         P2_0 = 1;
+C51 COMPILER V9.54   ________                                                              04/12/2018 09:20:42 PAGE 3   
+
+ 118   1      i=10;
+ 119   1         P0=(table[x2]& 0x7f);
+ 120   1        // P0=0xb0;
+ 121   1         P2_1 = 0;
+ 122   1       //  delay(5);
+ 123   1        while(i--);
+ 124   1         P2_1 = 1;
+ 125   1      i=10;
+ 126   1        P0=table[x3];
+ 127   1      //  P0=0x99;
+ 128   1         P2_2 = 0;
+ 129   1        // delay(5);
+ 130   1        while(i--);
+ 131   1         P2_2 = 1;
+ 132   1      i = 10;
+ 133   1        P0=table[x4];
+ 134   1      //    P0=0x92;
+ 135   1         P2_3 = 0;
+ 136   1       //  delay(5);
+ 137   1       while(i--);
+ 138   1         P2_3 = 1;
+ 139   1         
+ 140   1      }
+ 141          /*
+ 142          ********************************************************************************
+ 143          ** º¯ÊýÃû³Æ £º main(void)
+ 144          ** º¯Êý¹¦ÄÜ £º Ö÷º¯Êý
+ 145          ********************************************************************************
+ 146          */
+ 147          uchar intr_flag = 0;
+ 148          
+ 149          uchar cardaddr;
+ 150          uchar cardnum[4];
+ 151          uchar cardstate;
+ 152          uchar cardcheck;
+ 153          uchar state = 0;
+ 154          uchar intrstate = 0xff;
+ 155          void main()
+ 156          {
+ 157   1        
+ 158   1        int i=0;
+ 159   1          EX0=1;         //Íâ²¿ÖÐ¶Ï0¿ª
+ 160   1        IT0=0;         //½´¥·¢
+ 161   1        
+ 162   1        TMOD=0x20;       //ÓÃ¶¨Ê±Æ÷ÉèÖÃ´®¿Ú²¨ÌØÂÊ    9600 
+ 163   1        TH1=0xfd;
+ 164   1        TL1=0xfd;
+ 165   1        TR1=1;
+ 166   1        REN=1;          //´®¿Ú³õÊ¼»¯
+ 167   1        SM0=0;
+ 168   1        SM1=1;
+ 169   1        EA=1;           //¿ªÆô×ÜÖÐ¶Ï
+ 170   1        ES=1;
+ 171   1        
+ 172   1        while(1)
+ 173   1        {
+ 174   2       
+ 175   2          if(num==1)    //ÅÐ¶ÏÊÇ·ñÓÐ´®¿ÚÊý¾ÝµÄ´«ËÍ
+ 176   2          {
+ 177   3            ES=0;
+ 178   3            num=0;
+ 179   3                
+C51 COMPILER V9.54   ________                                                              04/12/2018 09:20:42 PAGE 4   
+
+ 180   3      
+ 181   3      
+ 182   3            TI=0;
+ 183   3            ES=1;
+ 184   3        
+ 185   3          }
+ 186   2          
+ 187   2      
+ 188   2          intrstate--;
+ 189   2          
+ 190   2          if(intrstate > 10)
+ 191   2          {
+ 192   3            for(i = 0; i<36;i++)
+ 193   3                putchar2(card_msg_cp[i]);
+ 194   3      
+ 195   3            for(i = 0; i<25;i++)
+ 196   3            {
+ 197   4                
+ 198   4              if(card_msg_cp[i+0] == 0xff && card_msg_cp[i+1] == 0xff && card_msg_cp[i+2] == 0xff && card_msg_cp[i+3
+             -] == 0xff && card_msg_cp[i+4] == 0xff)
+ 199   4              {
+ 200   5                      //putchar2(0x01);
+ 201   5                cardcheck = card_msg_cp[i+5]^card_msg_cp[i+6]^card_msg_cp[i+7]^card_msg_cp[i+8]^card_msg_cp[i+9]^card
+             -_msg_cp[i+10];
+ 202   5                if(cardcheck == card_msg_cp[i+11])
+ 203   5                {
+ 204   6                  //putchar2(0x02);
+ 205   6                  cardaddr = card_msg_cp[i+5];
+ 206   6                  cardstate = card_msg_cp[i+6];
+ 207   6                  if(cardtable[0] == card_msg_cp[i+7] && cardtable[1] == card_msg_cp[i+8] && cardtable[2] == card_msg_
+             -cp[i+9] && cardtable[3] == card_msg_cp[i+10])
+ 208   6                  {
+ 209   7                    //putchar2(0x03);
+ 210   7                    state = 0x01;
+ 211   7                    //display(0xd0d0); 
+ 212   7                      break;
+ 213   7                  }
+ 214   6                  else 
+ 215   6                  {
+ 216   7                    state = 0x02;
+ 217   7                    //display(0xeeee);
+ 218   7                    
+ 219   7                  }
+ 220   6                }
+ 221   5              }
+ 222   4      
+ 223   4              
+ 224   4            }
+ 225   3          
+ 226   3          }
+ 227   2          else
+ 228   2          {
+ 229   3            intrstate++;
+ 230   3            state = 0x00;
+ 231   3            putchar2(0x01);
+ 232   3      
+ 233   3          }
+ 234   2      
+ 235   2      
+ 236   2          switch(state)
+ 237   2          {
+ 238   3            case 0x00: 
+C51 COMPILER V9.54   ________                                                              04/12/2018 09:20:42 PAGE 5   
+
+ 239   3              display(0x0000);
+ 240   3              break;
+ 241   3            case 0x01:
+ 242   3              display(0xd0d0);
+ 243   3              break;
+ 244   3            case 0x02:
+ 245   3              display(0xeeee);
+ 246   3              break;
+ 247   3            default:
+ 248   3              display(0x0000);
+ 249   3              break;
+ 250   3          }
+ 251   2          
+ 252   2          
+ 253   2        } 
+ 254   1      }
+ 255          void ser() interrupt 4
+ 256          {
+ 257   1        int i;
+ 258   1        RI=0;
+ 259   1        //P2=SBUF;      //½ÓÊÕÊý¾ÝSBUF£¬¼´½«¼ÆËã»úµÄÊý¾Ý½ÓÊÕ¡£
+ 260   1        card_msg[msg_start++]=SBUF;
+ 261   1      
+ 262   1        if(msg_start >= 36)
+ 263   1        {     
+ 264   2          for(i = 0; i<36;i++)
+ 265   2          {
+ 266   3            card_msg_cp[i] = card_msg[i];
+ 267   3            
+ 268   3          }
+ 269   2          msg_start = 0;
+ 270   2        }
+ 271   1        num=1;
+ 272   1        intrstate=0xff;
+ 273   1      }
+ 274          
+ 275          void getchar2(void) interrupt 0 using 1
+ 276          {
+ 277   1      
+ 278   1        //while (RXD1);
+ 279   1      intr_flag = 1;  
+ 280   1        _nop_();
+ 281   1        _nop_();
+ 282   1        _nop_();
+ 283   1        _nop_();
+ 284   1        _nop_();
+ 285   1        _nop_();
+ 286   1        _nop_();
+ 287   1        _nop_();    
+ 288   1        _nop_();
+ 289   1        _nop_();
+ 290   1        _nop_();
+ 291   1        _nop_();
+ 292   1        _nop_();
+ 293   1        _nop_();
+ 294   1        _nop_();    
+ 295   1        delay_bps();      
+ 296   1        SBUF1_bit0 = RXD1; //0            
+ 297   1        delay_bps();      
+ 298   1        SBUF1_bit1 = RXD1; //1           
+ 299   1        delay_bps();      
+ 300   1        SBUF1_bit2 = RXD1; //2        
+C51 COMPILER V9.54   ________                                                              04/12/2018 09:20:42 PAGE 6   
+
+ 301   1        delay_bps();      
+ 302   1        SBUF1_bit3 = RXD1; //3            
+ 303   1        delay_bps();      
+ 304   1        SBUF1_bit4 = RXD1; //4            
+ 305   1        delay_bps();      
+ 306   1        SBUF1_bit5 = RXD1; //5            
+ 307   1        delay_bps();      
+ 308   1        SBUF1_bit6 = RXD1; //6            
+ 309   1        delay_bps();      
+ 310   1        SBUF1_bit7 = RXD1; //7         
+ 311   1        delay_bps();   
+ 312   1        
+ 313   1                
+ 314   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    726    ----
+   CONSTANT SIZE    =     24    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     90       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
