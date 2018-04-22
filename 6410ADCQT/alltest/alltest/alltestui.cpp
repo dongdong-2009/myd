@@ -169,35 +169,7 @@ void alltestui::onalltest()
             {
 
                 m_edit->setText(buffer);
-                /*if(len == 4)
-                {
-                    qian = buffer[0] - '0';
-                    bai = buffer[1] - '0';
-                    shi = buffer[2] - '0';
-                    ge = buffer[3] - '0';
-                }
-                if(len == 3)
-                {
-                    qian = 0;
-                    bai = buffer[0] - '0';
-                    shi = buffer[1] - '0';
-                    ge = buffer[2] - '0';
-                }
-                if(len == 2)
-                {
-                    qian = 0;
-                    bai = 0;
-                    shi = buffer[0] - '0';
-                    ge = buffer[1] - '0';
-                }
-                if(len == 1)
-                {
-                    qian = 0;
-                    bai = 0;
-                    shi = 0;
-                    ge = buffer[0] - '0';
-                }
-                num = (qian * 1000 + bai * 100 + shi * 10 + ge)*3.3*1000/1024;*/
+
                 num = atoi(buffer);
                  printf("num = %d\r\n",num);
                 num = num*3.3*1000/1024;
