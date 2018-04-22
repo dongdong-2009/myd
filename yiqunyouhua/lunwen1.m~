@@ -43,7 +43,7 @@ rand('state',5)
 E=2*ones(N,1); % dian lu zong neng liang
 E1=zeros(N,1); % mei ge jie dian zuo wei fa she jie dian suo xiao hao de zong neng liang 
 E2=zeros(N,1);% mei ge jie dian zuo wei jie shou jie shou jie dian xiao hao de zong neng liang
-E3=2*ones(N,1);% sheng yu neng liang
+E3=2*ones(N,1);% mei ge jie dian sheng yu neng liang
 kd=2000;  % fa song kd ge bit
 Eelec=50*10.^-9;
 Eamp=100*10.^-12;
@@ -109,6 +109,7 @@ for k=1:K
             PL(k,m)=0;
         end
     end% ma yi m pa yi ci jie dian N
+    
     Delta_Tau=zeros(N,N);
     for m=1:M
         if PL(k,m)
