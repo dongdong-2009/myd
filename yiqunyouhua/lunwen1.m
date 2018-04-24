@@ -109,6 +109,7 @@ for k=1:K
             PL(k,m)=0;
         end
     end% ma yi m pa yi ci jie dian N
+    
     Delta_Tau=zeros(N,N);
     for m=1:M
         if PL(k,m)
