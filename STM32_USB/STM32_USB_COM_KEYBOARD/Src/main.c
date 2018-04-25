@@ -57,11 +57,45 @@ static void MX_USART1_UART_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
-
+//unsigned char key[4][4];
+unsigned char keyval;
+struct io_port 
+{                                            
+GPIO_TypeDef *GPIO_x;                 
+unsigned short GPIO_pin;
+	
+}; 
+static struct io_port key_output[4] = {
+{GPIOB, GPIO_PIN_12}, {GPIOB, GPIO_PIN_13},
+{GPIOB, GPIO_PIN_14}, {GPIOB, GPIO_PIN_15}
+};
+static struct io_port key_input[4] = {
+{GPIOC, GPIO_PIN_6}, {GPIOC, GPIO_PIN_7},
+{GPIOC, GPIO_PIN_8}, {GPIOC, GPIO_PIN_9}
+};
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
+void update_key(void)
+{
+	unsigned char i, j;
+	for(i = 0; i < 4; i++)             //i????,??????
+	{
+		 HAL_GPIO_WritePin(key_output[i].GPIO_x, key_output[i].GPIO_pin, GPIO_PIN_SET);
 
+		for(j = 0; j < 4; j++)            //j????,?????????????  
+		{
+		 if(HAL_GPIO_ReadPin(key_input[j].GPIO_x,  key_input[j].GPIO_pin) == GPIO_PIN_SET)
+		 {
+			keyval = i*4+j; 
+			break;
+		 }
+		}
+		if(keyval != 0xff)
+			break;
+		 HAL_GPIO_WritePin(key_output[i].GPIO_x, key_output[i].GPIO_pin, GPIO_PIN_RESET);
+	}
+}
 /* USER CODE END 0 */
 
 int main(void)
@@ -95,8 +129,14 @@ uint8_t HID_Buffer[]={"Hello,HID!~"};
   while (1)
   {
   /* USER CODE END WHILE */
-   USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, HID_Buffer,65);
-   HAL_Delay(500);
+		update_key();
+		if(keyval != 0xff)
+		{
+			HID_Buffer[0] = keyval + '0';
+			USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, HID_Buffer,65);
+			keyval = 0xff;
+		}
+		HAL_Delay(500);
   /* USER CODE BEGIN 3 */
 
   }

@@ -496,12 +496,11 @@ ARM Macro Assembler    Page 8
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=stm32_usb_com_keyboard\startup_stm32f103xb.d -ostm32_usb_com_keybo
-ard\startup_stm32f103xb.o -IY:\beifen\mymatlabprj\daizuo\STM32_USB\STM32_USB_CO
-M_KEYBOARD\MDK-ARM\RTE -Id:\Keil_v5\ARM\PACK\ARM\CMSIS\4.3.0\CMSIS\Include -Id:
-\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.1.0\Device\Include --predefine="__MICROL
-IB SETA 1" --predefine="__UVISION_VERSION SETA 516" --predefine="_RTE_ SETA 1" 
---predefine="STM32F10X_MD SETA 1" --list=startup_stm32f103xb.lst startup_stm32f
-103xb.s
+ard\startup_stm32f103xb.o -I.\RTE\_STM32_USB_COM_KEYBOARD -Ie:\Keil_v5\ARM\PACK
+\ARM\CMSIS\5.0.1\CMSIS\Include -Ie:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\D
+evice\Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SE
+TA 524" --predefine="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --list=sta
+rtup_stm32f103xb.lst startup_stm32f103xb.s
 
 
 
