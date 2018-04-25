@@ -202,10 +202,10 @@ static int8_t CUSTOM_HID_OutEvent_FS (uint8_t event_idx, uint8_t state)
 		case 2: /* LED2 *//*
 			(state == 1) ? LED(2) : LED_off(2); 
 			break;
-		case 3: /* LED3 */
+		case 3: /* LED3 *//*
 			(state == 1) ? LED(3) : LED_off(3); 
 			break;
-		case 4: /* LED4 */
+		case 4: /* LED4 *//*
 			(state == 1) ? LED(4) : LED_off(4); 
 			break;
 
