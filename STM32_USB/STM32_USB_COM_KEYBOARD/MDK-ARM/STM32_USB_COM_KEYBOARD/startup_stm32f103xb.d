@@ -1,0 +1,1 @@
+stm32_usb_com_keyboard\startup_stm32f103xb.o: startup_stm32f103xb.s
