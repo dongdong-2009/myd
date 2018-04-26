@@ -93,7 +93,8 @@ int main(void)
 		}
 		report[2] = 0x53;
   /* USER CODE BEGIN 2 */
-		USBD_HID_SendReport(&hUsbDeviceFS, report,8);
+		
+		
   /* USER CODE END 2 */
 		for (i = 0;i < 0x7;i++)
 		{
@@ -106,7 +107,7 @@ int main(void)
   {
 		//report[0] = 0x01;
 
-		for(i = 0x59;i < 0x61;i++)
+		for(i = 0x58;i < 0x61;i++)
 		{
 			j = 0xff;
 			while(j--);

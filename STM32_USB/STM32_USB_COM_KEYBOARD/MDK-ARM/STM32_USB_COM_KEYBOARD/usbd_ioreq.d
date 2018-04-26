@@ -2,13 +2,13 @@ stm32_usb_com_keyboard\usbd_ioreq.o: ../Middlewares/ST/STM32_USB_Device_Library/
 stm32_usb_com_keyboard\usbd_ioreq.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
 stm32_usb_com_keyboard\usbd_ioreq.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
 stm32_usb_com_keyboard\usbd_ioreq.o: ../Inc/usbd_conf.h
-stm32_usb_com_keyboard\usbd_ioreq.o: e:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-stm32_usb_com_keyboard\usbd_ioreq.o: e:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-stm32_usb_com_keyboard\usbd_ioreq.o: e:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32_usb_com_keyboard\usbd_ioreq.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+stm32_usb_com_keyboard\usbd_ioreq.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+stm32_usb_com_keyboard\usbd_ioreq.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 stm32_usb_com_keyboard\usbd_ioreq.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
 stm32_usb_com_keyboard\usbd_ioreq.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h
 stm32_usb_com_keyboard\usbd_ioreq.o: ../Drivers/CMSIS/Include/core_cm3.h
-stm32_usb_com_keyboard\usbd_ioreq.o: e:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32_usb_com_keyboard\usbd_ioreq.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32_usb_com_keyboard\usbd_ioreq.o: ../Drivers/CMSIS/Include/core_cmInstr.h
 stm32_usb_com_keyboard\usbd_ioreq.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 stm32_usb_com_keyboard\usbd_ioreq.o: ../Drivers/CMSIS/Include/core_cmFunc.h

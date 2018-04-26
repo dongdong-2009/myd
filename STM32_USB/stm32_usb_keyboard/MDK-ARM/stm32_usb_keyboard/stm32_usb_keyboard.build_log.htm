@@ -29,12 +29,17 @@ Project File Date:  04/25/2018
 Build target 'stm32_usb_keyboard'
 compiling main.c...
 ../Src/main.c(96): warning:  #223-D: function "USBD_HID_SendReport" declared implicitly
-  		USBD_HID_SendReport(&hUsbDeviceFS, report,8);
-../Src/main.c: 1 warning, 0 errors
-linking...
-Program Size: Code=11456 RO-data=292 RW-data=244 ZI-data=3316  
-FromELF: creating hex file...
-"stm32_usb_keyboard\stm32_usb_keyboard.axf" - 0 Error(s), 1 Warning(s).
+  		USBD_HID_SendReport(&hUsbDeviceFS, report,8);23
+../Src/main.c(96): warning:  #174-D: expression has no effect
+  		USBD_HID_SendReport(&hUsbDeviceFS, report,8);23
+../Src/main.c(99): error:  #65: expected a ";"
+  		for (i = 0;i < 0x7;i++)
+../Src/main.c(125): warning:  #12-D: parsing restarts here after previous syntax error
+  }
+../Src/main.c(73): warning:  #177-D: variable "j" was declared but never referenced
+  	uint8_t j;
+../Src/main.c: 4 warnings, 1 error
+"stm32_usb_keyboard\stm32_usb_keyboard.axf" - 1 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -52,7 +57,8 @@ Package Vendor: ARM
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:4.1.0
-Build Time Elapsed:  00:00:08
+Target not created.
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>
