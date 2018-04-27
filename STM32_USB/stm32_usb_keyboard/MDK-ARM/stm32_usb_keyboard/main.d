@@ -35,3 +35,4 @@ stm32_usb_keyboard\main.o: ../Inc/usbd_conf.h
 stm32_usb_keyboard\main.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 stm32_usb_keyboard\main.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 stm32_usb_keyboard\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
+stm32_usb_keyboard\main.o: ../Src/NRF24L01.h

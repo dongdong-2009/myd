@@ -29,7 +29,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x57D37A36)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd.h)(0x57D37A36)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h)(0x57D37A36)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h)(0x57D37A36)
-F (../Src/main.c)(0x5AE1BAC2)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include --C99-I Y:\beifen\mymatlabprj\daizuo\STM32_USB\stm32_usb_keyboard\MDK-ARM\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\4.3.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.1.0\Device\Include-D__UVISION_VERSION="516" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm32_usb_keyboard\main.o --omf_browse stm32_usb_keyboard\main.crf --depend stm32_usb_keyboard\main.d)
+F (../Src/main.c)(0x5AE30A83)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include --C99-I Y:\beifen\mymatlabprj\daizuo\STM32_USB\stm32_usb_keyboard\MDK-ARM\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\4.3.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.1.0\Device\Include-D__UVISION_VERSION="516" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm32_usb_keyboard\main.o --omf_browse stm32_usb_keyboard\main.crf --depend stm32_usb_keyboard\main.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x57D37A36)
 I (../Inc/stm32f1xx_hal_conf.h)(0x5AE038B8)
 I (../Inc/mxconstants.h)(0x5AE038BC)
@@ -64,6 +64,7 @@ I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h)(0x57D37A38)
 I (../Inc/usbd_conf.h)(0x5AE038AA)
 I (d:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x55AEF5F2)
 I (d:\Keil_v5\ARM\ARMCC\include\string.h)(0x55AEF5F2)
+I (../Src/NRF24L01.h)(0x549E7460)
 F (../Src/usbd_desc.c)(0x5AE038B0)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include --C99-I Y:\beifen\mymatlabprj\daizuo\STM32_USB\stm32_usb_keyboard\MDK-ARM\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\4.3.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.1.0\Device\Include-D__UVISION_VERSION="516" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm32_usb_keyboard\usbd_desc.o --omf_browse stm32_usb_keyboard\usbd_desc.crf --depend stm32_usb_keyboard\usbd_desc.d)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x57D37A38)
 I (../Inc/usbd_conf.h)(0x5AE038AA)
@@ -211,6 +212,38 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd.h)(0x57D37A36)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h)(0x57D37A36)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h)(0x57D37A36)
 I (../Inc/stm32f1xx_it.h)(0x5AE038B4)
+F (..\Src\nRF24L01.c)(0x5AE28D9C)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include --C99-I Y:\beifen\mymatlabprj\daizuo\STM32_USB\stm32_usb_keyboard\MDK-ARM\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\4.3.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.1.0\Device\Include-D__UVISION_VERSION="516" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm32_usb_keyboard\nrf24l01.o --omf_browse stm32_usb_keyboard\nrf24l01.crf --depend stm32_usb_keyboard\nrf24l01.d)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x57D37A36)
+I (../Inc/stm32f1xx_hal_conf.h)(0x5AE038B8)
+I (../Inc/mxconstants.h)(0x5AE038BC)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x57D37A36)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x57D37A32)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h)(0x57D37A32)
+I (../Drivers/CMSIS/Include/core_cm3.h)(0x57D37A36)
+I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55AEF5F2)
+I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x57D37A36)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x57D37A36)
+I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x57D37A36)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x57D37A32)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x57D37A36)
+I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55AEF5F2)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h)(0x57D37A36)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h)(0x57D37A36)
+I (..\Src\nRF24L01.h)(0x549E7460)
+F (..\Src\NRF24L01.h)(0x549E7460)()
 F (../Drivers/CMSIS//Device/ST/STM32F1xx/Source/Templates/system_stm32f1xx.c)(0x57D37A33)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -I../Drivers/CMSIS/Include -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include --C99-I Y:\beifen\mymatlabprj\daizuo\STM32_USB\stm32_usb_keyboard\MDK-ARM\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\4.3.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.1.0\Device\Include-D__UVISION_VERSION="516" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm32_usb_keyboard\system_stm32f1xx.o --omf_browse stm32_usb_keyboard\system_stm32f1xx.crf --depend stm32_usb_keyboard\system_stm32f1xx.d)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x57D37A32)
 I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h)(0x57D37A32)

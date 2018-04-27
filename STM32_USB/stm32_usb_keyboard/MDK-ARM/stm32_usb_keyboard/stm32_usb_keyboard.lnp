@@ -5,6 +5,7 @@
 "stm32_usb_keyboard\usbd_conf.o"
 "stm32_usb_keyboard\usb_device.o"
 "stm32_usb_keyboard\stm32f1xx_it.o"
+"stm32_usb_keyboard\nrf24l01.o"
 "stm32_usb_keyboard\system_stm32f1xx.o"
 "stm32_usb_keyboard\stm32f1xx_hal_pcd_ex.o"
 "stm32_usb_keyboard\stm32f1xx_hal_spi.o"
