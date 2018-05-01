@@ -1,0 +1,21 @@
+--cpu Cortex-M3
+".\startup_stm32f10x_md.o"
+".\gpio.o"
+".\main.o"
+".\fputc.o"
+".\fgetc.o"
+".\nrf24l01.o"
+".\lcdst7567.o"
+".\i2c_fram.o"
+".\stm32f10x_gpio.o"
+".\stm32f10x_rcc.o"
+".\stm32f10x_usart.o"
+".\stm32f10x_i2c.o"
+".\stm32f10x_spi.o"
+".\stm32f10x_exti.o"
+".\misc.o"
+".\system_stm32f10x.o"
+--library_type=microlib --strict --scatter ".\MyPrj.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\MyPrj.map" -o .\MyPrj.axf
