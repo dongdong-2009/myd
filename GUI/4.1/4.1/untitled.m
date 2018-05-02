@@ -22,7 +22,7 @@ function varargout = untitled(varargin)
 
 % Edit the above text to modify the response to help untitled
 
-% Last Modified by GUIDE v2.5 01-Apr-2018 17:03:24
+% Last Modified by GUIDE v2.5 01-May-2018 23:45:14
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -256,7 +256,32 @@ Xb=max(A);  %数据最大值
 set(handles.edit14,'string',num2str(Xb));
 guidata(hObject,handles);
 
+B = A;
+C = zeros(0,0);
+for j = 1 : 3
 
+    S = std(B);
+    P = mean(B);
+    n = length(B);
+    B = zeros(0,0);
+    
+    Gn = log(n-3)/2.3 + 1.36 - n/550
+    for i = 1 : n
+        if((A(i) >= (P-(Gn * S)))&&(A(i) <= (P+(Gn * S))))
+            B = [B;A(i)];
+        else
+            C = [C;A(i)];
+        end
+    end
+   
+end
+   set(handles.editGn,'string',num2str(B));
+   set(handles.editinvaliddata,'string',num2str(C));
+    n = length(B)
+    Gn = log(n-3)/2.3 + 1.36 - n/550;
+    set(handles.edit17,'string',num2str(Gn))
+   
+   
 function edit1_Callback(hObject, eventdata, handles)
 % hObject    handle to edit1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -573,6 +598,75 @@ function edit14_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function edit14_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit14 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editinvaliddata_Callback(hObject, eventdata, handles)
+% hObject    handle to editinvaliddata (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editinvaliddata as text
+%        str2double(get(hObject,'String')) returns contents of editinvaliddata as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editinvaliddata_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editinvaliddata (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editGn_Callback(hObject, eventdata, handles)
+% hObject    handle to editGn (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGn as text
+%        str2double(get(hObject,'String')) returns contents of editGn as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGn_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGn (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit17_Callback(hObject, eventdata, handles)
+% hObject    handle to edit17 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit17 as text
+%        str2double(get(hObject,'String')) returns contents of edit17 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit17_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit17 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 

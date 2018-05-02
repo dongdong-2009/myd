@@ -1346,10 +1346,17 @@
       <Size>100</Size>
       <ActiveTab>4</ActiveTab>
       <Doc>
+<<<<<<< HEAD
+        <Name>../Src/main.c</Name>
+        <ColumnNumber>0</ColumnNumber>
+        <TopLine>130</TopLine>
+        <CurrentLine>155</CurrentLine>
+=======
         <Name>startup_stm32f103xb.s</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>1</TopLine>
         <CurrentLine>1</CurrentLine>
+>>>>>>> 47ec8c51e07b3c7b01bed0962d2370e732ed8998
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
